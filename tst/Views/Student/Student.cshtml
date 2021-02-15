@@ -1,0 +1,69 @@
+﻿@model List<tst.Models.student>
+@{
+    ViewBag.Title = "Student";
+}
+
+<div class="container">
+    <form>
+        <div class="row">
+            <div class="col-xs-6">
+                <input type="text" placeholder="Search Student"  class="form-control" required>
+            </div>
+            <div class="col-xs-6">
+                <input type="submit" class="btn btn-success" value="Sersh Student" />
+            </div>
+        </div>
+    </form>
+
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h2>gestions<b>Students</b></h2>
+                    </div>
+                    <div class="col-xs-6">
+                        <a class="btn btn-success" asp-action="AddStudent"  asp-controller="Student"  data-toggle="modal"><span>Add New Student</span></a>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>CIN</th>
+                        <th>NOM</th>
+                        <th>PRENOM</th>
+                        <th>ADRESSE</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var student in Model)
+                    {
+                        <tr>
+                            <td>@student.id</td>
+                            <td>@student.cin</td>
+                            <td>@student.nom</td>
+                            <td>@student.prenom</td>
+                            <td>@student.adresse</td>
+                            <td>
+                                <a asp-route-id="@student.id" asp-action="EditStudent" asp-controller="Student" class="edit" data-toggle="modal">
+                                    <i class="material-icons" data-toggle="tooltip" title="Edit">
+                                        <img src="~/images/pencil.svg" />
+                                    </i>
+                                </a>
+                                <a class="delete" asp-route-id="@student.id" onclick="return confirm('Are you sure ?')" data-toggle="modal">
+                                    <i class="material-icons" data-toggle="tooltip" title="Delete">
+                                        <img src="~/images/delete.svg" />
+                                    </i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
